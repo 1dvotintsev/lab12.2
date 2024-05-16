@@ -195,7 +195,91 @@ namespace TestProject
                 hashtable.AddItem("cxz", 3);
                 hashtable = hashtable.Delete("zxc"); 
                 hashtable = hashtable.Delete("zxc");
-                Assert.IsNull(hashtable.table[1]); 
+                //Assert.IsNull(hashtable.table[1]);
+                Assert.AreEqual(true, hashtable.table[1].isDeleted);
+            }
+
+            [TestMethod]
+            public void Test22()
+            {
+                var hashtable = new Hashtable<string, string>(5,1);
+                hashtable.Count = 5;
+                Point<string, string> point1 = new Point<string, string>("1", "");
+                Point<string, string> point2 = new Point<string, string>("2", "");
+                Point<string, string> point3 = new Point<string, string>("3", "");
+                Point<string, string> point4 = new Point<string, string>("4", "");
+                Point<string, string> point5 = new Point<string, string>("5", "");
+
+                hashtable.table[1] = point1;
+                hashtable.table[2] = point2;
+                hashtable.table[3] = point3;
+                hashtable.table[4] = point4;
+                hashtable.table[0] = point5;
+
+                //hashtable.AddItem("5", "");
+
+                Assert.ThrowsException<Exception>(() => hashtable.AddItem("7", ""));
+                //Assert.ThrowsException<Exception>(() => hashtable.table = hashtable.AddData("7", ""));
+            }
+
+            [TestMethod]
+            public void Test23()
+            {
+                var hashtable = new Hashtable<string, string>(7, 1);
+                hashtable.Count = 5;
+                Point<string, string> point1 = new Point<string, string>("1", "");
+                Point<string, string> point2 = new Point<string, string>("2", "");
+                Point<string, string> point3 = new Point<string, string>("3", "");
+                Point<string, string> point4 = new Point<string, string>("4", "");
+                Point<string, string> point5 = new Point<string, string>("5", "");
+
+                Assert.ThrowsException<Exception>(() => hashtable.Delete("7"));
+
+            }
+
+            [TestMethod]
+            public void Test24()
+            {
+                var hashtable = new Hashtable<string, string>(7, 1);
+                hashtable.Count = 5;
+                Point<string, string> point1 = new Point<string, string>("1", "");
+                Point<string, string> point2 = new Point<string, string>("2", "");
+                Point<string, string> point3 = new Point<string, string>("3", "");
+                Point<string, string> point4 = new Point<string, string>("4", "");
+                Point<string, string> point5 = new Point<string, string>("6", "");
+
+                Assert.ThrowsException<Exception>(() => hashtable.Delete("5"));
+
+            }
+
+            [TestMethod]
+            public void Test25()
+            {
+                var hashtable = new Hashtable<string, string>(7, 1);
+                hashtable.Count = 5;
+                Point<string, string> point1 = new Point<string, string>("1", "");
+                Point<string, string> point2 = new Point<string, string>("2", "");
+                Point<string, string> point3 = new Point<string, string>("3", "");
+                Point<string, string> point4 = new Point<string, string>("4", "");
+                Point<string, string> point5 = new Point<string, string>("6", "");
+
+                Assert.ThrowsException<Exception>(() => hashtable.Delete("7"));
+
+            }
+
+            [TestMethod]
+            public void Test26()
+            {
+                var hashtable = new Hashtable<string, string>(5, 1);
+                hashtable.Count = 5;
+                Point<string, string> point1 = new Point<string, string>("1", "");
+                Point<string, string> point2 = new Point<string, string>("2", "");
+                Point<string, string> point3 = new Point<string, string>("3", "");
+                Point<string, string> point4 = new Point<string, string>("4", "");
+                Point<string, string> point5 = new Point<string, string>("5", "");
+
+                //Assert.ThrowsException<Exception>(() => hashtable.AddItem("7", ""));
+
             }
         }
     }

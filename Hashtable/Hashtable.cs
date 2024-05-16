@@ -60,6 +60,7 @@ namespace Hashtable
                     }
 
                     temp.table = temp.AddData(key,value);
+                    //temp.AddData(key ,value);
                     return temp;
 
                 }
@@ -81,13 +82,13 @@ namespace Hashtable
 
             if (table[index] != null)
             {
-                while (current < table.Length || (table[current] != null|| table[current].Key != null))
+                while (current < table.Length || (((table[current] != null|| table[current].Key != null)) && !table[current].isDeleted))
                     current++;
 
                 if (current == table.Length)
                 {
                     current = 0;
-                    while (current < index || (table[current] != null || table[current].Key != null))
+                    while (current < index || (((table[current] != null || table[current].Key != null)) && !table[current].isDeleted))
                         current++;
 
                     if (current == index)
@@ -122,7 +123,7 @@ namespace Hashtable
                     current = 0;
                     while (current < index)
                     {
-                        if (table[current] != null && table[index].Key != null && table[current].Key.Equals(key)) return current;
+                        if (table[current] != null && table[current].Key != null && table[current].Key.Equals(key)) return current;  //вторая проверка было index
                         current++;
                     }
                 }
@@ -144,6 +145,7 @@ namespace Hashtable
             if (table[index] != null && table[index].Key != null && table[index].Key.Equals(key))
             {
                 table[index] = table[index].Remove();
+                Count--;
                 return this;
             }
 
@@ -156,6 +158,7 @@ namespace Hashtable
                     if (table[current] != null && table[index].Key != null && table[current].Key.Equals(key))
                     {
                         table[current] = table[current].Remove();
+                        Count--;
                         return this;
                     }
                     current++;
@@ -167,6 +170,7 @@ namespace Hashtable
                     if (table[current] != null && table[index].Key != null && table[current].Key.Equals(key))
                     {
                         table[current] = table[current].Remove();
+                        Count--;
                         return this;
                     }
                     current++;

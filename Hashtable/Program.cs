@@ -45,37 +45,60 @@ namespace Hashtable
 
                     case 3:
                         Console.Clear();
-                        string? name;
-                        Console.WriteLine("Введите имя для поискка: ");
-                        name = Console.ReadLine();
-                        answer = hashtable.FindItem(name);
-                        if (answer > 0 )
+                        if (hashtable.Count > 0)
                         {
-                            Console.WriteLine($"Объект с таким именем находится на позиции {answer}");
+                            string? name;
+                            Console.WriteLine("Введите имя для поискка: ");
+                            name = Console.ReadLine();
+                            answer = hashtable.FindItem(name);
+                            if (answer > 0)
+                            {
+                                Console.WriteLine($"Объект с таким именем находится на позиции {answer}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Объекта с таким именем нет");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Объекта с таким именем нет");
+                            Console.WriteLine("Таблица пуста");
                         }
                         break;
 
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Введите имя для удаления:");
-                        string ans = Console.ReadLine();
-                        try
+                        if (hashtable.Count > 0)
                         {
-                            hashtable = hashtable.Delete(ans);
+                            Console.WriteLine("Введите имя для удаления:");
+                            string ans = Console.ReadLine();
+                            try
+                            {
+                                hashtable = hashtable.Delete(ans);
+                            }
+                            catch(Exception e){ Console.WriteLine(e.Message); }
                         }
-                        catch { Console.WriteLine("Объекта с таким именем нет в таблице"); }
+                        else
+                        {
+                            Console.WriteLine("Таблица пуста");
+                        }
                         break;
                     case 5:
                         Console.Clear();
                         Emoji emoji = new Emoji();
-                        emoji.RandomInit();
-                        emoji.Name += "(добавленный)";
-                        hashtable = hashtable.AddItem(emoji.Name, emoji);
-                        Console.WriteLine("Элемент добавлен");
+                        bool ok = true;
+                        while (ok)
+                        {
+                            try
+                            {
+                                emoji.RandomInit();
+                                emoji.Name += "(добавленный)";
+                                hashtable = hashtable.AddItem(emoji.Name, emoji);
+                                Console.WriteLine("Элемент добавлен");
+                                ok = false;
+                            }
+                            catch (Exception e) { }
+                        }
                         break;
                     default: break;
 

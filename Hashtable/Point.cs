@@ -46,9 +46,11 @@ namespace Hashtable
 
         public Point<TKey, TValue> Remove() 
         {
-            Point<TKey, TValue> temp = new Point<TKey, TValue>();
-            temp.isDeleted = true;
-            return temp;
+            //Point<TKey, TValue> temp = new Point<TKey, TValue>();
+            this.Key = default;
+            this.Value = default;
+            this.isDeleted = true;
+            return this;
         }
     }
 }
